@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">ProValutalarKursi</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="space"> </string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="kurs">Valyutalarning o’zgarish tarixi</string>
+    <string name="olinishi">Olinishi</string>
+    <string name="sotilishi">Sotilishi</string>
+    <string name="_20_00">20:00</string>
+    <string name="_10_530_87_uzs">10 530,87 UZS</string>
+    <string name="_14_10_2021">14.10.2021</string>
+</resources>
