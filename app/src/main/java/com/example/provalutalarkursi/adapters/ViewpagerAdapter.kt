@@ -12,20 +12,23 @@ import com.example.provalutalarkursi.databinding.CardBinding
 import com.example.provalutalarkursi.models.Data
 import java.util.*
 
-class ViewpagerAdapter(var list: List<Data>,var activity: FragmentActivity) : RecyclerView.Adapter<ViewpagerAdapter.Vh>() {
+class ViewpagerAdapter(var list: List<Data>, var activity: FragmentActivity) :
+    RecyclerView.Adapter<ViewpagerAdapter.Vh>() {
     lateinit var color_list: IntArray
 
     inner class Vh(var itemview: CardBinding) : RecyclerView.ViewHolder(itemview.root) {
         fun bind(data: Data) {
             val viewmodel = ViewModelProviders.of(activity)[ViewPagerViewmodel::class.java]
             val randomColor = getRandomColor()
-            var gd = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, randomColor)
+            val gd = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, randomColor)
             itemview.ln.setBackgroundDrawable(gd)
             viewmodel.set(randomColor[0])
 
             itemview.cardDate.text = data.datetime
-            itemview.cardSell.text =  if (data.nbu_cell_price!!.length > 2) "${data.nbu_cell_price} UZS" else "${data.cb_price} UZS"
-            itemview.cardBuy.text =  if (data.nbu_buy_price!!.length > 2) "${data.nbu_buy_price} UZS" else "${data.cb_price} UZS"
+            itemview.cardSell.text =
+                if (data.nbu_cell_price!!.length > 2) "${data.nbu_cell_price} UZS" else "${data.cb_price} UZS"
+            itemview.cardBuy.text =
+                if (data.nbu_buy_price!!.length > 2) "${data.nbu_buy_price} UZS" else "${data.cb_price} UZS"
         }
     }
 

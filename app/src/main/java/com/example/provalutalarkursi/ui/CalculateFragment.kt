@@ -95,17 +95,20 @@ class CAlculateFragment : Fragment() {
                         .load(
                             "https://flagcdn.com/160x120/${
                                 shuffled[position].code?.substring(0, 2)?.toLowerCase()
-                            }.png")
+                            }.png"
+                        )
                         .into(binding.image2)
-                    binding.cardSell.text =  if (it[position].nbu_cell_price!!.length > 2) "${it[position].nbu_cell_price} UZS" else "${it[position].cb_price} UZS"
-                    binding.cardBuy.text = if (it[position].nbu_buy_price!!.length > 2) "${it[position].nbu_buy_price} UZS" else "${it[position].cb_price} UZS"
+                    binding.cardSell.text =
+                        if (it[position].nbu_cell_price!!.length > 2) "${it[position].nbu_cell_price} UZS" else "${it[position].cb_price} UZS"
+                    binding.cardBuy.text =
+                        if (it[position].nbu_buy_price!!.length > 2) "${it[position].nbu_buy_price} UZS" else "${it[position].cb_price} UZS"
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
 
                 }
             }
-            binding.edit.addTextChangedListener(object :TextWatcher{
+            binding.edit.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
                     s: CharSequence?,
                     start: Int,
@@ -117,7 +120,7 @@ class CAlculateFragment : Fragment() {
 
                 @SuppressLint("SetTextI18n")
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if(s.toString() !=""){
+                    if (s.toString() != "") {
                         val toInt = s.toString().toFloat()
                         val spn1 = binding.title.selectedItemPosition
                         val spn2 = binding.title2.selectedItemPosition
@@ -125,9 +128,9 @@ class CAlculateFragment : Fragment() {
                         val price2 = it[spn2].cb_price!!.toFloat()
 
                         var r = (price1 * toInt)
-                        var value = (r/price2)
+                        var value = (r / price2)
                         binding.result.text = "$value ${shuffled[spn2].code}"
-                    }else binding.result.text = ""
+                    } else binding.result.text = ""
                 }
 
                 override fun afterTextChanged(s: Editable?) {

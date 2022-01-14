@@ -2,22 +2,21 @@ package com.example.provalutalarkursi
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.provalutalarkursi.databinding.ActivityMainBinding
+import com.example.provalutalarkursi.drawer.home.HomeFragment
 import com.example.provalutalarkursi.services.AppWorkManager
 import com.example.provalutalarkursi.viewmodels.ViewPagerViewmodel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import nl.joery.animatedbottombar.AnimatedBottomBar
 import java.util.concurrent.TimeUnit
 
-open class MainActivity : AppCompatActivity() {
+open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewPagerViewmodel: ViewPagerViewmodel
@@ -78,19 +77,22 @@ open class MainActivity : AppCompatActivity() {
             ) {
                 when (newIndex) {
                     1 -> {
-                        val findNavController = findNavController(R.id.nav_host_fragment_content_main)
-                        findNavController.popBackStack()
+                        val findNavController =
+                            findNavController(R.id.nav_host_fragment_content_main)
+                        findNavController.popBackStack()    
                         findNavController.navigate(R.id.currencyFragment)
 
                     }
                     2 -> {
-                        val findNavController = findNavController(R.id.nav_host_fragment_content_main)
+                        val findNavController =
+                            findNavController(R.id.nav_host_fragment_content_main)
                         findNavController.popBackStack()
                         findNavController.navigate(R.id.calculateFragment)
 
                     }
                     else -> {
-                        val findNavController = findNavController(R.id.nav_host_fragment_content_main)
+                        val findNavController =
+                            findNavController(R.id.nav_host_fragment_content_main)
                         findNavController.popBackStack()
                         findNavController.navigate(R.id.nav_home)
 
@@ -100,11 +102,16 @@ open class MainActivity : AppCompatActivity() {
         })
     }
 
+
     override fun onBackPressed() {
         if (binding.drawerLayout.isDrawerOpen(binding.navView)) {
             binding.drawerLayout.closeDrawers()
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun onDataPass(data: Int) {
+        Log.d(TAG, "onDataPass: $data")
     }
 }

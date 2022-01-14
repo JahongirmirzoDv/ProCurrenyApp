@@ -1,13 +1,15 @@
 package com.example.provalutalarkursi.drawer.home
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.example.provalutalarkursi.R
 import com.example.provalutalarkursi.adapters.HistoryRvAdapter
 import com.example.provalutalarkursi.adapters.ViewpagerAdapter
 import com.example.provalutalarkursi.databinding.FragmentHomeBinding
@@ -26,6 +28,7 @@ class HomeFragment : Fragment() {
     private lateinit var tittleList: List<String>
     private lateinit var dataList: ArrayList<Data>
     lateinit var db: AppDatabase
+    lateinit var onpress: OnDataPass
     lateinit var historyRvAdapter: HistoryRvAdapter
     private val TAG = "HomeFragment"
 
@@ -102,17 +105,42 @@ class HomeFragment : Fragment() {
             tab.text = dataList[position].code
         }.attach()
 
-        viewPagerViewmodel.get().observe(requireActivity(), {
-            Log.d(TAG, "onCreateView: $it")
-            Toast.makeText(requireContext(), "$it", Toast.LENGTH_LONG).show()
-//            for (i in 0 until binding.tab.tabCount) {
-//                val inflate = LayoutInflater.from(requireContext()).inflate(R.layout.tab_item, null)
-//                binding.tab.getTabAt(i)?.customView = inflate
-//            }
+        binding.viewpager2.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+            }
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                Log.e("Selected_Page", position.toString())
+                onpress.onDataPass(position)
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+            }
         })
+
+        for (i in 0 until binding.tab.tabCount) {
+            val inflate = LayoutInflater.from(requireContext()).inflate(R.layout.tab_item, null)
+            binding.tab.getTabAt(i)?.customView = inflate
+        }
 
         val zoomOut = ZoomOut()
         binding.viewpager2.setPageTransformer(zoomOut)
         binding.indicator.attachToPager(binding.viewpager2)
+    }
+
+    interface OnDataPass {
+        fun onDataPass(data: Int)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        onpress = context as OnDataPass
     }
 }
