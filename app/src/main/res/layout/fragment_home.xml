@@ -13,6 +13,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:id="@+id/container"
+        android:background="@color/purple_200"
         android:layout_height="match_parent"
         tools:context=".drawer.home.HomeFragment">
 
@@ -32,11 +33,16 @@
                android:id="@+id/tab"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
+               app:tabIndicatorHeight="0dp"
                app:layout_constraintLeft_toLeftOf="parent"
                app:layout_constraintRight_toRightOf="parent"
                app:layout_constraintTop_toTopOf="parent"
-               app:tabGravity="center"
-               app:tabMode="scrollable" />
+               app:tabIndicator="@drawable/indicator"
+               app:tabIndicatorAnimationMode="elastic"
+               app:tabIndicatorGravity="stretch"
+               app:tabMode="scrollable"
+               app:tabSelectedTextColor="@color/white"
+               app:tabTextColor="@color/grey" />
 
            <androidx.viewpager2.widget.ViewPager2
                android:id="@+id/viewpager2"

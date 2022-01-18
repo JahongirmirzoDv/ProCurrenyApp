@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface ApiService {
     @GET("json/")
-    fun getData(): Call<List<Data>>
+    suspend fun getData(): List<Data>
 }

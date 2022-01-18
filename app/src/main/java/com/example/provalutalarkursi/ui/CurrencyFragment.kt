@@ -1,17 +1,18 @@
 package com.example.provalutalarkursi.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.provalutalarkursi.R
 import com.example.provalutalarkursi.adapters.CurrencyAdapter
 import com.example.provalutalarkursi.databinding.FragmentCurrencyBinding
+import com.example.provalutalarkursi.db.AppDatabase
 import com.example.provalutalarkursi.models.Data
 import com.example.provalutalarkursi.viewmodels.AppViewModel
-import com.example.provalutalarkursi.viewmodels.ViewPagerViewmodel
+import kotlinx.coroutines.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,6 +24,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [CurrencyFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@DelicateCoroutinesApi
 class CurrencyFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -44,18 +46,29 @@ class CurrencyFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentCurrencyBinding.inflate(inflater, container, false)
-        var viewmodel = ViewModelProvider(this).get(AppViewModel::class.java)
+        setHasOptionsMenu(true)
 
-        viewmodel.getData().observe(requireActivity(), {
-            val currencyAdapter = CurrencyAdapter(it, object : CurrencyAdapter.onPress {
+        GlobalScope.launch(Dispatchers.Main) {
+            val data = getData()
+            val currencyAdapter = CurrencyAdapter(data, object : CurrencyAdapter.onPress {
+                @SuppressLint("ResourceType")
                 override fun onclick(data: Data, position: Int) {
-
+                    val bundle = Bundle()
+                    bundle.putInt("pos", position)
+                    findNavController().navigate(R.id.calculateFragment, bundle)
                 }
             })
             binding.currencyRv.adapter = currencyAdapter
-        })
+        }
 
         return binding.root
+    }
+
+    suspend fun getData(): List<Data> {
+        var db = AppDatabase.getInstance(requireContext())
+        return withContext(Dispatchers.IO) {
+            db.dataDao().getList()
+        }
     }
 
     companion object {
@@ -76,5 +89,11 @@ class CurrencyFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.search, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+
     }
 }

@@ -23,8 +23,8 @@ class ViewpagerAdapter(var list: List<Data>, var activity: FragmentActivity) :
             val gd = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, randomColor)
             itemview.ln.setBackgroundDrawable(gd)
             viewmodel.set(randomColor[0])
-
-            itemview.cardDate.text = data.datetime
+            val split = data.date!!.split(" ")
+            itemview.cardDate.text = split[0]
             itemview.cardSell.text =
                 if (data.nbu_cell_price!!.length > 2) "${data.nbu_cell_price} UZS" else "${data.cb_price} UZS"
             itemview.cardBuy.text =

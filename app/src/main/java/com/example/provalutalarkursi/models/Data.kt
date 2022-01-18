@@ -50,7 +50,27 @@ class Data {
         this.dateday = dateday
     }
 
+
     constructor()
+    constructor(
+        code: String?,
+        cb_price: String?,
+        date: String?,
+        nbu_buy_price: String?,
+        nbu_cell_price: String?,
+        title: String?,
+        datetime: String?,
+        dateday: String?
+    ) {
+        this.code = code
+        this.cb_price = cb_price
+        this.date = date
+        this.nbu_buy_price = nbu_buy_price
+        this.nbu_cell_price = nbu_cell_price
+        this.title = title
+        this.datetime = datetime
+        this.dateday = dateday
+    }
 
     override fun toString(): String {
         return super.toString()

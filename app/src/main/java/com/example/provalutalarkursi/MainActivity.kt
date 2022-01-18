@@ -6,27 +6,28 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
 import com.example.provalutalarkursi.databinding.ActivityMainBinding
 import com.example.provalutalarkursi.drawer.home.HomeFragment
-import com.example.provalutalarkursi.services.AppWorkManager
+import com.example.provalutalarkursi.utils.Status
+import com.example.provalutalarkursi.viewmodels.AppViewModel
 import com.example.provalutalarkursi.viewmodels.ViewPagerViewmodel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import nl.joery.animatedbottombar.AnimatedBottomBar
-import java.util.concurrent.TimeUnit
 
 open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewPagerViewmodel: ViewPagerViewmodel
+    lateinit var appViewModel: AppViewModel
     private val TAG = "MainActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        appViewModel = ViewModelProvider(this)[AppViewModel::class.java]
         viewPagerViewmodel = ViewModelProvider(this)[ViewPagerViewmodel::class.java]
+
         val toolbar = binding.appBarMain.toolbar
 
         toolbar.setNavigationOnClickListener {
@@ -63,10 +64,6 @@ open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
             binding.appBarMain.include2.bottomBar.tabColorSelected = it
         })
 
-        val work = PeriodicWorkRequestBuilder<AppWorkManager>(12, TimeUnit.HOURS)
-            .build()
-        WorkManager.getInstance(this).enqueue(work)
-
         binding.appBarMain.include2.bottomBar.setOnTabSelectListener(object :
             AnimatedBottomBar.OnTabSelectListener {
             override fun onTabSelected(
@@ -79,7 +76,7 @@ open class MainActivity : AppCompatActivity(), HomeFragment.OnDataPass {
                     1 -> {
                         val findNavController =
                             findNavController(R.id.nav_host_fragment_content_main)
-                        findNavController.popBackStack()    
+                        findNavController.popBackStack()
                         findNavController.navigate(R.id.currencyFragment)
 
                     }

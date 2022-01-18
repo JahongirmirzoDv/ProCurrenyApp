@@ -13,13 +13,13 @@ class CurrencyAdapter(var list: List<Data>, var onpress: onPress) :
         fun bind(data: Data, position: Int) {
             Picasso.get()
                 .load("https://flagcdn.com/80x60/${data.code?.substring(0, 2)?.toLowerCase()}.png")
-                .into(itemview.image)
+                .into(itemview.flag)
             itemview.code.text = data.code
-            itemview.cardSell.text =
+            itemview.sellPrice.text =
                 if (data.nbu_cell_price!!.length > 2) "${data.nbu_cell_price} UZS" else "${data.cb_price} UZS"
-            itemview.cardBuy.text =
+            itemview.buyPrice.text =
                 if (data.nbu_buy_price!!.length > 2) "${data.nbu_buy_price} UZS" else "${data.cb_price} UZS"
-            itemview.calculate.setOnClickListener {
+            itemview.calc.setOnClickListener {
                 onpress.onclick(data, position)
             }
         }
