@@ -36,6 +36,17 @@
             app:layout_constraintTop_toTopOf="@id/flag" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/title"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/flag"
+            app:layout_constraintTop_toBottomOf="@id/code" />
+
+        <TextView
             android:id="@+id/buy_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

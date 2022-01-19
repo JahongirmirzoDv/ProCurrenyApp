@@ -11,7 +11,7 @@
         <entry key="..\:/anp/ProValutalarKursi/app/src/main/res/layout/app_bar_main.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/ProValutalarKursi/app/src/main/res/layout/card.xml" value="0.18" />
         <entry key="..\:/anp/ProValutalarKursi/app/src/main/res/layout/content_main.xml" value="0.16" />
-        <entry key="..\:/anp/ProValutalarKursi/app/src/main/res/layout/currency_item.xml" value="0.14560810810810812" />
+        <entry key="..\:/anp/ProValutalarKursi/app/src/main/res/layout/currency_item.xml" value="0.22" />
         <entry key="..\:/anp/ProValutalarKursi/app/src/main/res/layout/fragment_asosiy.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/ProValutalarKursi/app/src/main/res/layout/fragment_c_alculate.xml" value="0.2" />
         <entry key="..\:/anp/ProValutalarKursi/app/src/main/res/layout/fragment_card_viewpager.xml" value="0.14560810810810812" />
@@ -28,9 +28,6 @@
         <entry key="..\:/anp/ProValutalarKursi/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.15608108108108107" />
       </map>
     </option>
-  </component>
-  <component name="ProjectPlainTextFileTypeManager">
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/provalutalarkursi/services/AppWorkManager.kt" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

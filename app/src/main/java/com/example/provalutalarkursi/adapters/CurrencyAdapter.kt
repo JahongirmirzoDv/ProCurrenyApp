@@ -15,6 +15,7 @@ class CurrencyAdapter(var list: List<Data>, var onpress: onPress) :
                 .load("https://flagcdn.com/80x60/${data.code?.substring(0, 2)?.toLowerCase()}.png")
                 .into(itemview.flag)
             itemview.code.text = data.code
+            itemview.title.text = data.title
             itemview.sellPrice.text =
                 if (data.nbu_cell_price!!.length > 2) "${data.nbu_cell_price} UZS" else "${data.cb_price} UZS"
             itemview.buyPrice.text =

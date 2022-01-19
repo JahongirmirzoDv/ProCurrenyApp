@@ -52,7 +52,7 @@ class HomeFragment : Fragment() {
                     Log.d(TAG, "onCreate: Loading")
                 }
                 Status.ERROR -> {
-                    Log.d(TAG, "onCreate: Error")
+                    Log.d(TAG, "onCreate: ${it.message}")
                 }
                 Status.SUCCESS -> {
                     binding.text1.visibility = View.VISIBLE
